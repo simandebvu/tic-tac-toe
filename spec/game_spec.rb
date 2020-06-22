@@ -1,8 +1,6 @@
-
 require './lib/board.rb'
 require './lib/helpers.rb'
 require './lib/player.rb'
-
 
 describe Board do
   let(:board) { Board.new }
@@ -11,7 +9,7 @@ describe Board do
   end
 
   it '#update_board should add a symbol to a position' do
-    expect(board.update_board(0, 'X')).not_to eql('O')    
+    expect(board.update_board(0, 'X')).not_to eql('O')
   end
 
   it '#move_made? it should check if the move have already been made' do
@@ -45,20 +43,16 @@ describe Board do
   end
 end
 
+describe Helpers do
+  let(:helpers) { Helpers.new }
+  it '#valid_symbol? checks if the input is X or O' do
+    expect(helpers.valid_symbol?('Z')).not_to eql(true)
+  end
+end
 
-
-# describe Player do
-#   # let(:board) { Board.new }
-#   # describe '#display_board' do
-#   #   it 'It should correctly display 9 cells' do
-#   #     # expect(board.display_board).to eql(board.display_board)
-#   #   end
-#   # end
-# end
-
-# display_board
-# valid_symbol?
-# play_game
-# input_valid?
-# move_made?
-# update_board
+describe Player do
+  let(:player) { Player.new('Shingi', 'X') }
+  it '#initalize checks if the object created is a player' do
+    expect(player).to be_a(Player)
+  end
+end

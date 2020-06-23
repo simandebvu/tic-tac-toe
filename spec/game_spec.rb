@@ -20,7 +20,7 @@ describe Board do
   end
 
   describe "#update_board" do 
-    it 'Should add a symbol to a position.' do
+    it 'Should add the correct symbol to a position.' do
       expect(board.update_board(0, 'X')).not_to eql('O')
     end
   
@@ -38,39 +38,100 @@ describe Board do
       board.board[1] = 'X'
       expect(board.move_made?(1)).to eql(true)
     end
+
     it 'Return false if input in move made is not X or O.' do
       board.board[2] = 'G'
       expect(board.move_made?(2)).not_to eql(true)
     end
+
     it 'Require X and O to be uppercase only.' do
       board.board[3] = 'o'
       expect(board.move_made?(3)).to eql(false)
     end
   end
 
-  it '#input_valid? checks if input is between 1 - 9 (Integer)' do
-    expect(board.input_valid?(5)).to eql(true)
+  describe "#input_valid?" do 
+    let(:rand_string) {"IM AN Int ;)"}
+    it 'checks if input is between 1 - 9 (Integer)' do
+      expect(board.input_valid?(5)).to eql(true)
+    end
+  
+    it 'Return false if input is greater than 9.' do
+      expect(board.input_valid?(55)).not_to eql(true)
+    end
+
+    it 'Return false if input is not an Integer.' do
+      expect(board.input_valid?(rand_string)).not_to eql(true)
+    end
   end
 
-  it '#win_cond_row? checks if a player has won by completing a row' do
-    board.board[0] = 'X'
-    board.board[1] = 'X'
-    board.board[2] = 'X'
-    expect(board.win_cond_row?).not_to eql(false)
+  describe "#win_cond_row? " do 
+    it 'Checks if a player has won by completing a row' do
+      board.board[0] = 'X'
+      board.board[1] = 'X'
+      board.board[2] = 'X'
+      expect(board.win_cond_row?).not_to eql(false)
+    end
+
+    it 'Returns true only if the player symbols are the same. ' do
+      board.board[0] = 'X'
+      board.board[1] = 'x'
+      board.board[2] = 'O'
+      expect(board.win_cond_row?).to eql(false)
+    end
+
+    it 'Only accepts values matching a row.' do
+      board.board[2] = 'O'
+      board.board[3] = 'O'
+      board.board[4] = 'O'
+      expect(board.win_cond_row?).to eql(false)
+    end
   end
 
-  it '#win_cond_col? checks if a player has won by completing a column' do
-    board.board[2] = 'X'
-    board.board[5] = 'X'
-    board.board[8] = 'X'
-    expect(board.win_cond_col?).not_to eql(false)
+  describe "#win_cond_col?" do 
+    it '#win_cond_col? checks if a player has won by completing a column' do
+      board.board[2] = 'X'
+      board.board[5] = 'X'
+      board.board[8] = 'X'
+      expect(board.win_cond_col?).not_to eql(false)
+    end
+
+    it 'Returns true only if the player symbols are the same. ' do
+      board.board[2] = 'X'
+      board.board[5] = 'x'
+      board.board[8] = 'O'
+      expect(board.win_cond_col?).to eql(false)
+    end
+
+    it 'Only accepts values matching a column.' do
+      board.board[0] = 'O'
+      board.board[1] = 'O'
+      board.board[2] = 'O'
+      expect(board.win_cond_col?).to eql(false)
+    end
   end
 
-  it '#win_cond_diag? checks if a player has won by completing a diagonal' do
-    board.board[0] = 'O'
-    board.board[4] = 'O'
-    board.board[8] = 'O'
-    expect(board.win_cond_diag?).not_to eql(false)
+  describe "#win_cond_diag?" do 
+    it '#win_cond_diag? checks if a player has won by completing a diagonal' do
+      board.board[0] = 'O'
+      board.board[4] = 'O'
+      board.board[8] = 'O'
+      expect(board.win_cond_diag?).not_to eql(false)
+    end
+
+    it 'Returns true only if the player symbols are the same. ' do
+      board.board[0] = 'X'
+      board.board[4] = 'x'
+      board.board[8] = 'O'
+      expect(board.win_cond_diag?).to eql(false)
+    end
+
+    it 'Only accepts values matching a diagonal input.' do
+      board.board[0] = 'O'
+      board.board[1] = 'O'
+      board.board[2] = 'O'
+      expect(board.win_cond_diag?).to eql(false)
+    end
   end
 end
 

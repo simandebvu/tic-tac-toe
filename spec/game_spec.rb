@@ -5,35 +5,35 @@ require './lib/string.rb'
 
 describe Board do
   let(:board) { Board.new }
-  describe "#initialize" do 
+  describe '#initialize' do
     it 'It initializes an array with 9 cells' do
       expect(board.board.size).to eq 9
-    end  
+    end
 
     it 'Board must start off with Integers only.' do
-      expect(board.board.map(&:class)).to eql([Integer]*9)
+      expect(board.board.map(&:class)).to eql([Integer] * 9)
     end
-  
-    it 'Board must contain values between 1 and 9 only.' do 
-      expect(board.board.all?{|i| i = (1..9)}).not_to eql(false)
+
+    it 'Board must contain values between 1 and 9 only.' do
+      expect(board.board.all? { |_i| _i = (1..9) }).not_to eql(false)
     end
   end
 
-  describe "#update_board" do 
+  describe '#update_board' do
     it 'Should add the correct symbol to a position.' do
       expect(board.update_board(0, 'X')).not_to eql('O')
     end
-  
+
     it 'Should add a symbol to a position.' do
       expect(board.update_board(1, 'O')).to eql('O')
     end
-  
+
     it 'Should raise TypeError if given Invalid Argument.' do
-      expect{board.update_board('X', 'O')}.to raise_error(TypeError)
+      expect { board.update_board('X', 'O') }.to raise_error(TypeError)
     end
   end
 
-  describe "#move_made?" do 
+  describe '#move_made?' do
     it 'Check if the move has already been made.' do
       board.board[1] = 'X'
       expect(board.move_made?(1)).to eql(true)
@@ -50,12 +50,12 @@ describe Board do
     end
   end
 
-  describe "#input_valid?" do 
-    let(:rand_string) {"IM AN Int ;)"}
+  describe '#input_valid?' do
+    let(:rand_string) { 'IM AN Int ;)' }
     it 'checks if input is between 1 - 9 (Integer)' do
       expect(board.input_valid?(5)).to eql(true)
     end
-  
+
     it 'Return false if input is greater than 9.' do
       expect(board.input_valid?(55)).not_to eql(true)
     end
@@ -65,7 +65,7 @@ describe Board do
     end
   end
 
-  describe "#win_cond_row? " do 
+  describe '#win_cond_row? ' do
     it 'Checks if a player has won by completing a row' do
       board.board[0] = 'X'
       board.board[1] = 'X'
@@ -88,7 +88,7 @@ describe Board do
     end
   end
 
-  describe "#win_cond_col?" do 
+  describe '#win_cond_col?' do
     it '#win_cond_col? checks if a player has won by completing a column' do
       board.board[2] = 'X'
       board.board[5] = 'X'
@@ -111,7 +111,7 @@ describe Board do
     end
   end
 
-  describe "#win_cond_diag?" do 
+  describe '#win_cond_diag?' do
     it '#win_cond_diag? checks if a player has won by completing a diagonal' do
       board.board[0] = 'O'
       board.board[4] = 'O'
@@ -137,7 +137,7 @@ end
 
 describe Helpers do
   let(:helpers) { Helpers.new }
-  describe "#valid_symbol?" do
+  describe '#valid_symbol?' do
     it 'Checks if the input is X or O' do
       expect(helpers.valid_symbol?('Z')).not_to eql(true)
     end
@@ -150,71 +150,71 @@ end
 
 describe Player do
   let(:player) { Player.new('Shingi', 'X') }
-  describe "#initialize?" do
+  describe '#initialize?' do
     it 'Checks if the object created is a player' do
       expect(player).to be_a(Player)
     end
 
     it 'To store attributes of player_name and player_symbol' do
-      expect(player).to have_attributes(:player_name => a_string_starting_with("S"), :player_symbol => ('X') )
+      expect(player).to have_attributes(player_name: a_string_starting_with('S'), player_symbol: 'X')
     end
   end
 end
 
-describe String do 
-  let(:rand_string) {"jgdjshagdj"}
-  describe "#red" do
-    it "Is correctly concatenating the color to the text." do 
+describe String do
+  let(:rand_string) { 'jgdjshagdj' }
+  describe '#red' do
+    it 'Is correctly concatenating the color to the text.' do
       expect(rand_string.red).to eql("\e[31m" + rand_string + "\e[0m")
     end
 
-    it "Extends the String Class only" do
-      expect{1.red}.to raise_error(NoMethodError)
+    it 'Extends the String Class only' do
+      expect { 1.red }.to raise_error(NoMethodError)
     end
   end
-  describe "#green" do
-    it "Is correctly concatenating the color to the text." do 
+  describe '#green' do
+    it 'Is correctly concatenating the color to the text.' do
       expect(rand_string.green).to eql("\e[32m" + rand_string + "\e[0m")
     end
 
-    it "Extends the String Class only" do
-      expect{1.green}.to raise_error(NoMethodError)
+    it 'Extends the String Class only' do
+      expect { 1.green }.to raise_error(NoMethodError)
     end
   end
-  describe "#brown" do
-    it "Is correctly concatenating the color to the text." do 
+  describe '#brown' do
+    it 'Is correctly concatenating the color to the text.' do
       expect(rand_string.brown).to eql("\e[33m" + rand_string + "\e[0m")
     end
 
-    it "Extends the String Class only" do
-      expect{1.brown}.to raise_error(NoMethodError)
+    it 'Extends the String Class only' do
+      expect { 1.brown }.to raise_error(NoMethodError)
     end
   end
-  describe "#blue" do
-    it "Is correctly concatenating the color to the text." do 
+  describe '#blue' do
+    it 'Is correctly concatenating the color to the text.' do
       expect(rand_string.blue).to eql("\e[34m" + rand_string + "\e[0m")
     end
 
-    it "Extends the String Class only" do
-      expect{1.blue}.to raise_error(NoMethodError)
+    it 'Extends the String Class only' do
+      expect { 1.blue }.to raise_error(NoMethodError)
     end
   end
-  describe "#magenta" do
-    it "Is correctly concatenating the color to the text." do 
+  describe '#magenta' do
+    it 'Is correctly concatenating the color to the text.' do
       expect(rand_string.magenta).to eql("\e[35m" + rand_string + "\e[0m")
     end
 
-    it "Extends the String Class only" do
-      expect{1.magenta}.to raise_error(NoMethodError)
+    it 'Extends the String Class only' do
+      expect { 1.magenta }.to raise_error(NoMethodError)
     end
   end
-  describe "#cyan" do
-    it "Is correctly concatenating the color to the text." do 
+  describe '#cyan' do
+    it 'Is correctly concatenating the color to the text.' do
       expect(rand_string.cyan).to eql("\e[36m" + rand_string + "\e[0m")
     end
 
-    it "Extends the String Class only" do
-      expect{1.cyan}.to raise_error(NoMethodError)
+    it 'Extends the String Class only' do
+      expect { 1.cyan }.to raise_error(NoMethodError)
     end
   end
 end

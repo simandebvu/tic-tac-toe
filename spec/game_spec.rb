@@ -1,15 +1,36 @@
 require './lib/board.rb'
 require './lib/helpers.rb'
 require './lib/player.rb'
+require './lib/string.rb'
 
 describe Board do
   let(:board) { Board.new }
-  it 'It initializes an array with 9 cells' do
-    expect(board.board.size).to eq 9
+  describe "#initialize" do 
+    it 'It initializes an array with 9 cells' do
+      expect(board.board.size).to eq 9
+    end  
+
+    it 'Board must start off with Integers only.' do
+      expect(board.board.map(&:class)).to eql([Integer]*9)
+    end
+  
+    it 'Board must contain values between 1 and 9 only.' do 
+      expect(board.board.all?{|i| i = (1..9)}).not_to eql(false)
+    end
   end
 
-  it '#update_board should add a symbol to a position' do
-    expect(board.update_board(0, 'X')).not_to eql('O')
+  describe "#update_board" do 
+    it 'Should add a symbol to a position.' do
+      expect(board.update_board(0, 'X')).not_to eql('O')
+    end
+  
+    it 'Should add a symbol to a position.' do
+      expect(board.update_board(1, 'O')).to eql('O')
+    end
+  
+    it 'Should raise TypeError if given Invalid Argument.' do
+      expect{board.update_board('X', 'O')}.to raise_error(TypeError)
+    end
   end
 
   it '#move_made? it should check if the move have already been made' do
@@ -54,5 +75,27 @@ describe Player do
   let(:player) { Player.new('Shingi', 'X') }
   it '#initalize checks if the object created is a player' do
     expect(player).to be_a(Player)
+  end
+end
+
+describe String do 
+  let(:rand_string) {"jgdjshagdj"}
+  it "#red is correcly concatenating the color to the text." do 
+    expect(rand_string.red).to eql("\e[31m"+rand_string+"\e[0m")
+  end
+  it "#green is correcly concatenating the color to the text." do 
+    expect(rand_string.green).to eql("\e[32m"+rand_string+"\e[0m")
+  end
+  it "#brown is correcly concatenating the color to the text." do 
+    expect(rand_string.brown).to eql("\e[33m"+rand_string+"\e[0m")
+  end
+  it "#blue is correcly concatenating the color to the text." do 
+    expect(rand_string.blue).to eql("\e[34m"+rand_string+"\e[0m")
+  end
+  it "#magenta is correcly concatenating the color to the text." do 
+    expect(rand_string.magenta).to eql("\e[35m"+rand_string+"\e[0m")
+  end
+  it "#cyan is correcly concatenating the color to the text." do 
+    expect(rand_string.cyan).to eql("\e[36m"+rand_string+"\e[0m")
   end
 end

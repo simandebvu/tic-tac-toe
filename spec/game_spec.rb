@@ -33,9 +33,19 @@ describe Board do
     end
   end
 
-  it '#move_made? it should check if the move have already been made' do
-    board.board[1] = 'X'
-    expect(board.move_made?(1)).to eql(true)
+  describe "#move_made?" do 
+    it 'Check if the move has already been made.' do
+      board.board[1] = 'X'
+      expect(board.move_made?(1)).to eql(true)
+    end
+    it 'Return false if input in move made is not X or O.' do
+      board.board[2] = 'G'
+      expect(board.move_made?(2)).not_to eql(true)
+    end
+    it 'Require X and O to be uppercase only.' do
+      board.board[3] = 'o'
+      expect(board.move_made?(3)).to eql(false)
+    end
   end
 
   it '#input_valid? checks if input is between 1 - 9 (Integer)' do

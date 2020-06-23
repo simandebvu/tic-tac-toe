@@ -25,14 +25,22 @@ If no player gets three tokens in line and the board is full it is a tie.<br>
 
 - RUBY
 - VSCode
-  
+
+## Testing
+
+This project contains tests made with RSpec, testing the critical methods for the game ```lib``` folder.
+The tests are contained within the spec folder ```game_spec.rb```.
+Before running the tests make sure to install [RSpec](rspec.info)
+You can run the tests by typing ```rspec``` in the terminal, inside the root directory.
+If you want to see the description of the test just write ```rspec --format documentation```
+
 ## Authors
 
-👤 **Abel Lavieri**
+👤 **Gerónimo Morisot**
 
-- Github: [@alvp01](https://github.com/alvp01)
-- Twitter: [@alvp01](https://twitter.com/alvp01)
-- Linkedin: [alvp01](https://linkedin.com/in/alvp01)
+- Github: [@Bismarck-GM](https://github.com/Bismarck-GM)
+- Twitter: [@Rewritablee](https://twitter.com/Rewritablee)
+- Linkedin: [geronimomorisot](https://linkedin.com/in/geronimomorisot)
 
 👤 **Shingirayi Mandebvu**
 

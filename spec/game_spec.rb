@@ -137,36 +137,84 @@ end
 
 describe Helpers do
   let(:helpers) { Helpers.new }
-  it '#valid_symbol? checks if the input is X or O' do
-    expect(helpers.valid_symbol?('Z')).not_to eql(true)
+  describe "#valid_symbol?" do
+    it 'Checks if the input is X or O' do
+      expect(helpers.valid_symbol?('Z')).not_to eql(true)
+    end
+
+    it 'Expect an uppercase input' do
+      expect(helpers.valid_symbol?('x')).to eql(false)
+    end
   end
 end
 
 describe Player do
   let(:player) { Player.new('Shingi', 'X') }
-  it '#initalize checks if the object created is a player' do
-    expect(player).to be_a(Player)
+  describe "#initialize?" do
+    it 'Checks if the object created is a player' do
+      expect(player).to be_a(Player)
+    end
+
+    it 'To store attributes of player_name and player_symbol' do
+      expect(player).to have_attributes(:player_name => a_string_starting_with("S"), :player_symbol => ('X') )
+    end
   end
 end
 
 describe String do 
   let(:rand_string) {"jgdjshagdj"}
-  it "#red is correcly concatenating the color to the text." do 
-    expect(rand_string.red).to eql("\e[31m"+rand_string+"\e[0m")
+  describe "#red" do
+    it "Is correctly concatenating the color to the text." do 
+      expect(rand_string.red).to eql("\e[31m" + rand_string + "\e[0m")
+    end
+
+    it "Extends the String Class only" do
+      expect{1.red}.to raise_error(NoMethodError)
+    end
   end
-  it "#green is correcly concatenating the color to the text." do 
-    expect(rand_string.green).to eql("\e[32m"+rand_string+"\e[0m")
+  describe "#green" do
+    it "Is correctly concatenating the color to the text." do 
+      expect(rand_string.green).to eql("\e[32m" + rand_string + "\e[0m")
+    end
+
+    it "Extends the String Class only" do
+      expect{1.green}.to raise_error(NoMethodError)
+    end
   end
-  it "#brown is correcly concatenating the color to the text." do 
-    expect(rand_string.brown).to eql("\e[33m"+rand_string+"\e[0m")
+  describe "#brown" do
+    it "Is correctly concatenating the color to the text." do 
+      expect(rand_string.brown).to eql("\e[33m" + rand_string + "\e[0m")
+    end
+
+    it "Extends the String Class only" do
+      expect{1.brown}.to raise_error(NoMethodError)
+    end
   end
-  it "#blue is correcly concatenating the color to the text." do 
-    expect(rand_string.blue).to eql("\e[34m"+rand_string+"\e[0m")
+  describe "#blue" do
+    it "Is correctly concatenating the color to the text." do 
+      expect(rand_string.blue).to eql("\e[34m" + rand_string + "\e[0m")
+    end
+
+    it "Extends the String Class only" do
+      expect{1.blue}.to raise_error(NoMethodError)
+    end
   end
-  it "#magenta is correcly concatenating the color to the text." do 
-    expect(rand_string.magenta).to eql("\e[35m"+rand_string+"\e[0m")
+  describe "#magenta" do
+    it "Is correctly concatenating the color to the text." do 
+      expect(rand_string.magenta).to eql("\e[35m" + rand_string + "\e[0m")
+    end
+
+    it "Extends the String Class only" do
+      expect{1.magenta}.to raise_error(NoMethodError)
+    end
   end
-  it "#cyan is correcly concatenating the color to the text." do 
-    expect(rand_string.cyan).to eql("\e[36m"+rand_string+"\e[0m")
+  describe "#cyan" do
+    it "Is correctly concatenating the color to the text." do 
+      expect(rand_string.cyan).to eql("\e[36m" + rand_string + "\e[0m")
+    end
+
+    it "Extends the String Class only" do
+      expect{1.cyan}.to raise_error(NoMethodError)
+    end
   end
 end
